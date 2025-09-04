@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Gold Price Tracker",
+  "version": "1.0",
+  "description": "Track gold prices with real-time charts",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Gold Price Tracker"
+  }
+}
