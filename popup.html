@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="/assets/style.css">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
     <main class="container">
+      <section class="chart-hidden" id="gold-section">
         <div class="header">
-            <h1>🥇 Gold Price Tracker</h1>
+          <h1>🥇 Gold Price Tracker</h1>
         </div>
-        
+
         <div class="current-price">
+          <section class="price-display">
             <div class="price-value" id="currentPrice">Loading...</div>
-            <div class="price-unit">USD per Troy Ounce</div>
+            <span class="compare-value" id="comparePercent"> - </span>
+          </section>
+          <div class="price-unit">USD per Troy Ounce</div>
+          <div class="btn-section">
+            <button class="toggle-chart-btn" id="gold-toggle-btn">
+              show chart
+            </button>
+          </div>
         </div>
-        
+
         <div class="chart-container">
-            <canvas id="priceChart"></canvas>
+          <canvas id="priceChart"></canvas>
         </div>
-        
-        <div class="last-updated" id="lastUpdated">
-            Loading...
-        </div>
+
+        <div class="last-updated" id="lastUpdated">Loading...</div>
+      </section>
     </main>
-  
-  <script src="chart.js" ></script>
-  <script src="popup.js"></script>
-</body>
+
+    <script src="chart.js"></script>
+    <script src="popup.js"></script>
+  </body>
 </html>

@@ -1,6 +1,6 @@
 body {
-  width: 100vh;
   margin: 0;
+  min-width:400px;
   padding: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: white;
@@ -34,7 +34,6 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #ffd700;
-  margin-bottom: 4px;
 }
 
 .price-unit {
@@ -43,11 +42,19 @@ body {
 }
 
 .chart-container {
+  display: flex;
+  justify-content:center;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 12px;
   height: 150px;
   backdrop-filter: blur(10px);
+}
+
+
+.chart-hidden .chart-container {
+  display:none;
+
 }
 
 .loading {
@@ -71,7 +78,87 @@ body {
   margin-top: 8px;
 }
 
+.price-display{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.compare-value::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.up-trend::before {
+  background-image: url('/assets/up-trend.svg');
+}
+
+.down-trend::before {
+  background-image: url('/assets/down-trend.svg');
+}
+
+.up-trend {
+  color: rgba(80, 230, 15, 1); 
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.down-trend {
+  color: rgba(225, 48, 35, 1); 
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 canvas {
   max-width: 100%;
   max-height: 100%;
+}
+
+
+/* Toggle Chart Button */
+.toggle-chart-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.toggle-chart-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.toggle-chart-btn:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-chart-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
+.btn-section{
+  margin-top:8px;
+  display:flex;
+  justify-content:center;
 }

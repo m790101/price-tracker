@@ -1,9 +1,25 @@
 // Simple popup script - text only, no chart
 
+const MAX_DATA_LENGTH = 10;
+
 // Initialize popup when DOM is loaded
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOM loaded, initializing popup...");
   await fetchAndDisplayGoldPrice();
+});
+
+const goldToggleBtn = document.querySelector("#gold-toggle-btn");
+
+goldToggleBtn.addEventListener("click", () => {
+  const goldSection = document.querySelector("#gold-section");
+
+  goldSection.classList.toggle("chart-hidden");
+
+  if (goldSection.classList.contains("chart-hidden")) {
+    goldToggleBtn.textContent = "Show Chart";
+  } else {
+    goldToggleBtn.textContent = "Hide Chart";
+  }
 });
 
 const checkTimeInterval = (checkTime, interval = 1000 * 30 * 60) => {
@@ -51,8 +67,8 @@ async function fetchAndDisplayGoldPrice() {
 
     goldPrices.push(currentPrice);
 
-    if (goldPrices.length > 50) {
-      goldPrices = goldPrices.slice(-50);
+    if (goldPrices.length > MAX_DATA_LENGTH) {
+      goldPrices = goldPrices.slice(-MAX_DATA_LENGTH);
     }
 
     await chrome.storage.local.set({ goldPrices });
@@ -87,11 +103,24 @@ function updateCurrentPrice(priceData) {
 
 function displayPriceHistory(goldPrices) {
   const ctx = document.querySelector("#priceChart");
+  const comparePercentEl = document.getElementById("comparePercent");
 
   let labels = [];
   let prices = [];
 
-  const currentDate = goldPrices[0].date.slice(0, 10);
+  const currentDate = goldPrices[goldPrices?.length - 1].date.slice(0, 10);
+  if (goldPrices) {
+    const oldestPrice = goldPrices[0]?.price;
+    const newestPrice = goldPrices[goldPrices?.length - 1].price;
+    const performacePercent = Math.floor(
+      ((newestPrice - oldestPrice) / oldestPrice) * 100
+    );
+
+    comparePercentEl.textContent = performacePercent + "%";
+    comparePercentEl.classList.add(
+      performacePercent > 0 ? "up-trend" : "down-trend"
+    );
+  }
 
   goldPrices.forEach((priceData) => {
     const dateObj = new Date(priceData.date);
