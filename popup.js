@@ -112,9 +112,9 @@ function displayPriceHistory(goldPrices) {
   if (goldPrices) {
     const oldestPrice = goldPrices[0]?.price;
     const newestPrice = goldPrices[goldPrices?.length - 1].price;
-    const performacePercent = Math.floor(
+    const performacePercent = (
       ((newestPrice - oldestPrice) / oldestPrice) * 100
-    );
+    ).toFixed(2);
 
     comparePercentEl.textContent = performacePercent + "%";
     comparePercentEl.classList.add(
